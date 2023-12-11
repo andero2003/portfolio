@@ -17,7 +17,7 @@ jobs:
           flutter-version: '3.13.6' # specify the Flutter version
 
       - name: Build Web
-        run: flutter build web --release --base-href /Your-Repo-Name/
+        run: flutter build web --release --base-href /portfolio/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
