@@ -26,5 +26,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/video/projecttoolapp.mp4
-    - assets/video/simulationapp.mp4
+    - video/projecttoolapp.mp4
+    - video/simulationapp.mp4

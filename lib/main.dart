@@ -416,7 +416,7 @@ class ProjectsScreen extends StatelessWidget {
                 ProjectCard(
                   title: 'Monte Carlo Simulation Engine',
                   description: 'Monte Carlo Simulation Engine',
-                  mediaWidget: VideoPlayerWidget(videoUrl: 'assets/video/simulationapp.mp4'),
+                  mediaWidget: VideoPlayerWidget(videoUrl: 'video/simulationapp.mp4'),
                   icon: FontAwesomeIcons.github,
                   onTap: () async {
                     final Uri params = Uri(
@@ -433,7 +433,7 @@ class ProjectsScreen extends StatelessWidget {
                 ProjectCard(
                   title: 'Roblox Integrated Project Management Tool',
                   description: 'Roblox Integrated Project Management Tool',
-                  mediaWidget: VideoPlayerWidget(videoUrl: 'assets/video/projecttoolapp.mp4'),
+                  mediaWidget: VideoPlayerWidget(videoUrl: 'video/projecttoolapp.mp4'),
                   icon: FontAwesomeIcons.github,
                   onTap: () async {
                     final Uri params = Uri(
