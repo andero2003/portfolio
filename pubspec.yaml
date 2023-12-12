@@ -24,7 +24,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/video/projecttoolapp.mp4
-    - assets/video/simulationapp.mp4
