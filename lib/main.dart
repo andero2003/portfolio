@@ -416,7 +416,8 @@ class ProjectsScreen extends StatelessWidget {
                 ProjectCard(
                   title: 'Monte Carlo Simulation Engine',
                   description: 'Monte Carlo Simulation Engine',
-                  mediaWidget: VideoPlayerWidget(videoUrl: 'video/simulationapp.mp4'),
+                  mediaWidget: VideoPlayerWidget(
+                      videoUrl: 'https://cdn.discordapp.com/attachments/701919732563181679/1184248008834035762/simulationapp.mp4'),
                   icon: FontAwesomeIcons.github,
                   onTap: () async {
                     final Uri params = Uri(
@@ -433,7 +434,8 @@ class ProjectsScreen extends StatelessWidget {
                 ProjectCard(
                   title: 'Roblox Integrated Project Management Tool',
                   description: 'Roblox Integrated Project Management Tool',
-                  mediaWidget: VideoPlayerWidget(videoUrl: 'video/projecttoolapp.mp4'),
+                  mediaWidget: VideoPlayerWidget(
+                      videoUrl: 'https://cdn.discordapp.com/attachments/701919732563181679/1184248007860949073/projecttoolapp.mp4'),
                   icon: FontAwesomeIcons.github,
                   onTap: () async {
                     final Uri params = Uri(
@@ -467,7 +469,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(widget.videoUrl)
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
       ..initialize().then((_) {
         setState(() {});
         _controller.play();
