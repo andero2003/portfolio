@@ -4,6 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:video_player/video_player.dart';
+
+import 'dart:math';
 
 void main() {
   runApp(const MainApp());
@@ -331,93 +334,160 @@ class ProjectsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: FractionallySizedBox(
-          widthFactor: 0.8,
-          heightFactor: 0.8,
+          widthFactor: 0.65,
+          heightFactor: 0.75,
           alignment: Alignment.topCenter,
-          child: GridView.count(crossAxisCount: 3, childAspectRatio: 1.25, clipBehavior: Clip.none, children: [
-            ProjectCard(
-              title: 'Balloon Simulator',
-              description: 'Balloon Simulator',
-              image:
-                  'https://cdn.discordapp.com/attachments/990339971040821258/1130589877600276540/Ball_Earth_Thumb.jpg?ex=6589df60&is=65776a60&hm=0f63336d7cf73f857bad504533a7302ed628c51678b944e16bcf3bc58c00d5ff&',
-              onTap: () async {
-                final Uri params = Uri(
-                  scheme: 'https',
-                  host: 'www.roblox.com',
-                  path: '/games/13814171092/',
-                );
+          child: GridView.count(
+              crossAxisCount: 3,
+              childAspectRatio: 1.25,
+              clipBehavior: Clip.none,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              children: [
+                ProjectCard(
+                  title: 'Balloon Simulator',
+                  description: 'Balloon Simulator',
+                  mediaWidget: Image.network(
+                      'https://cdn.discordapp.com/attachments/990339971040821258/1130589877600276540/Ball_Earth_Thumb.jpg?ex=6589df60&is=65776a60&hm=0f63336d7cf73f857bad504533a7302ed628c51678b944e16bcf3bc58c00d5ff',
+                      width: double.infinity),
+                  onTap: () async {
+                    final Uri params = Uri(
+                      scheme: 'https',
+                      host: 'www.roblox.com',
+                      path: '/games/13814171092/',
+                    );
 
-                if (await canLaunchUrl(params)) {
-                  await launchUrl(params);
-                }
-              },
-            ),
-            ProjectCard(
-              title: 'Bouncy Castle Obby!',
-              description: 'Bouncy Castle Obby!',
-              image: 'https://tr.rbxcdn.com/1d3a1721a2d606ddbfa4d4c0a4c604f9/768/432/Image/Png',
-              onTap: () async {
-                final Uri params = Uri(
-                  scheme: 'https',
-                  host: 'www.roblox.com',
-                  path: '/games/6944713557/',
-                );
+                    if (await canLaunchUrl(params)) {
+                      await launchUrl(params);
+                    }
+                  },
+                ),
+                ProjectCard(
+                  title: 'Bouncy Castle Obby!',
+                  description: 'Bouncy Castle Obby!',
+                  mediaWidget:
+                      Image.network('https://tr.rbxcdn.com/1d3a1721a2d606ddbfa4d4c0a4c604f9/768/432/Image/Png', width: double.infinity),
+                  onTap: () async {
+                    final Uri params = Uri(
+                      scheme: 'https',
+                      host: 'www.roblox.com',
+                      path: '/games/6944713557/',
+                    );
 
-                if (await canLaunchUrl(params)) {
-                  await launchUrl(params);
-                }
-              },
-            ),
-            ProjectCard(
-              title: 'Spaceship Simulator',
-              description: 'Spaceship Simulator',
-              image: 'https://tr.rbxcdn.com/db25d76d4d1c8288ea1dc103a00d7218/768/432/Image/Png',
-              onTap: () async {
-                final Uri params = Uri(
-                  scheme: 'https',
-                  host: 'www.roblox.com',
-                  path: '/games/3132870038/',
-                );
+                    if (await canLaunchUrl(params)) {
+                      await launchUrl(params);
+                    }
+                  },
+                ),
+                ProjectCard(
+                  title: 'Spaceship Simulator',
+                  description: 'Spaceship Simulator',
+                  mediaWidget:
+                      Image.network('https://tr.rbxcdn.com/db25d76d4d1c8288ea1dc103a00d7218/768/432/Image/Png', width: double.infinity),
+                  onTap: () async {
+                    final Uri params = Uri(
+                      scheme: 'https',
+                      host: 'www.roblox.com',
+                      path: '/games/3132870038/',
+                    );
 
-                if (await canLaunchUrl(params)) {
-                  await launchUrl(params);
-                }
-              },
-            ),
-            ProjectCard(
-              title: 'Hacker Simulator',
-              description: 'Hacker Simulator',
-              image: 'https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png',
-              onTap: () async {
-                final Uri params = Uri(
-                  scheme: 'https',
-                  host: 'www.roblox.com',
-                  path: '/games/13006516178/',
-                );
+                    if (await canLaunchUrl(params)) {
+                      await launchUrl(params);
+                    }
+                  },
+                ),
+                ProjectCard(
+                  title: 'Hacker Simulator',
+                  description: 'Hacker Simulator',
+                  mediaWidget:
+                      Image.network('https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png', width: double.infinity),
+                  onTap: () async {
+                    final Uri params = Uri(
+                      scheme: 'https',
+                      host: 'www.roblox.com',
+                      path: '/games/13006516178/',
+                    );
 
-                if (await canLaunchUrl(params)) {
-                  await launchUrl(params);
-                }
-              },
-            ),
-            ProjectCard(
-              title: 'Monte Carlo Simulation Engine',
-              description: 'Hacker Simulator',
-              image: 'https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png',
-              onTap: () async {
-                final Uri params = Uri(
-                  scheme: 'https',
-                  host: 'www.roblox.com',
-                  path: '/games/13006516178/',
-                );
+                    if (await canLaunchUrl(params)) {
+                      await launchUrl(params);
+                    }
+                  },
+                ),
+                ProjectCard(
+                  title: 'Monte Carlo Simulation Engine',
+                  description: 'Monte Carlo Simulation Engine',
+                  mediaWidget: VideoPlayerWidget(videoUrl: 'assets/video/simulationapp.mp4'),
+                  icon: FontAwesomeIcons.github,
+                  onTap: () async {
+                    final Uri params = Uri(
+                      scheme: 'https',
+                      host: 'www.github.com',
+                      path: '/andero2003/simulations',
+                    );
 
-                if (await canLaunchUrl(params)) {
-                  await launchUrl(params);
-                }
-              },
-            ),
-          ])),
+                    if (await canLaunchUrl(params)) {
+                      await launchUrl(params);
+                    }
+                  },
+                ),
+                ProjectCard(
+                  title: 'Roblox Integrated Project Management Tool',
+                  description: 'Roblox Integrated Project Management Tool',
+                  mediaWidget: VideoPlayerWidget(videoUrl: 'assets/video/projecttoolapp.mp4'),
+                  icon: FontAwesomeIcons.github,
+                  onTap: () async {
+                    final Uri params = Uri(
+                      scheme: 'https',
+                      host: 'www.github.com',
+                      path: '/andero2003/coursework',
+                    );
+
+                    if (await canLaunchUrl(params)) {
+                      await launchUrl(params);
+                    }
+                  },
+                ),
+              ])),
     );
+  }
+}
+
+class VideoPlayerWidget extends StatefulWidget {
+  final String videoUrl;
+
+  VideoPlayerWidget({required this.videoUrl});
+
+  @override
+  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
+}
+
+class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset(widget.videoUrl)
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.play();
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _controller.value.isInitialized
+        ? AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: VideoPlayer(_controller),
+          )
+        : Container();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 }
 
@@ -456,7 +526,7 @@ class _ClickableCardState extends State<ClickableCard> {
 class ProjectCard extends StatelessWidget {
   final String title;
   final String description;
-  final String image;
+  final Widget mediaWidget;
   final IconData icon;
   final VoidCallback onTap;
 
@@ -464,7 +534,7 @@ class ProjectCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    required this.image,
+    required this.mediaWidget,
     required this.onTap,
     this.icon = FontAwesomeIcons.gamepad,
   });
@@ -479,7 +549,7 @@ class ProjectCard extends StatelessWidget {
             pageBuilder: (BuildContext context, _, __) {
               return ProjectScreen(
                 title: title,
-                image: image,
+                mediaWidget: mediaWidget,
                 description: description,
                 icon: icon,
                 onTap: onTap,
@@ -495,13 +565,7 @@ class ProjectCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(16)),
-              child: Hero(
-                tag: 'hero-$title',
-                child: Image.network(
-                  image,
-                  width: double.infinity,
-                ),
-              ),
+              child: Hero(tag: 'hero-$title', child: mediaWidget),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 4),
@@ -522,14 +586,14 @@ class ProjectScreen extends StatelessWidget {
   const ProjectScreen({
     super.key,
     required this.title,
-    required this.image,
+    required this.mediaWidget,
     required this.description,
     required this.icon,
     required this.onTap,
   });
 
   final String title;
-  final String image;
+  final Widget mediaWidget;
   final String description;
   final IconData icon;
   final VoidCallback onTap;
@@ -548,7 +612,7 @@ class ProjectScreen extends StatelessWidget {
           child: Hero(
             tag: "hero-$title",
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: min((mediaWidget is VideoPlayerWidget) ? 1000 : 600, MediaQuery.of(context).size.width),
               height: MediaQuery.of(context).size.height * 0.75,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 39, 39, 39),
@@ -567,12 +631,8 @@ class ProjectScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
-                              child: Image.network(
-                                image,
-                                width: double.infinity,
-                              ),
-                            ),
+                                borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+                                child: mediaWidget),
                             Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Material(
