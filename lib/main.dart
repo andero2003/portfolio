@@ -330,72 +330,314 @@ class ProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: CarouselSlider(
-      options: CarouselOptions(
-          height: MediaQuery.of(context).size.height * 0.6, enlargeCenterPage: true, clipBehavior: Clip.none, viewportFraction: 0.5),
-      items: [1, 2, 3, 4, 5].map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return AspectRatio(
-              aspectRatio: 0.85,
-              child: Card(
-                elevation: 10,
-                color: Color.fromARGB(255, 9, 6, 29),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
+      child: FractionallySizedBox(
+          widthFactor: 0.8,
+          heightFactor: 0.8,
+          alignment: Alignment.topCenter,
+          child: GridView.count(crossAxisCount: 3, childAspectRatio: 1.25, clipBehavior: Clip.none, children: [
+            ProjectCard(
+              title: 'Balloon Simulator',
+              description: 'Balloon Simulator',
+              image:
+                  'https://cdn.discordapp.com/attachments/990339971040821258/1130589877600276540/Ball_Earth_Thumb.jpg?ex=6589df60&is=65776a60&hm=0f63336d7cf73f857bad504533a7302ed628c51678b944e16bcf3bc58c00d5ff&',
+              onTap: () async {
+                final Uri params = Uri(
+                  scheme: 'https',
+                  host: 'www.roblox.com',
+                  path: '/games/13814171092/',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+            ProjectCard(
+              title: 'Bouncy Castle Obby!',
+              description: 'Bouncy Castle Obby!',
+              image: 'https://tr.rbxcdn.com/1d3a1721a2d606ddbfa4d4c0a4c604f9/768/432/Image/Png',
+              onTap: () async {
+                final Uri params = Uri(
+                  scheme: 'https',
+                  host: 'www.roblox.com',
+                  path: '/games/6944713557/',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+            ProjectCard(
+              title: 'Spaceship Simulator',
+              description: 'Spaceship Simulator',
+              image: 'https://tr.rbxcdn.com/db25d76d4d1c8288ea1dc103a00d7218/768/432/Image/Png',
+              onTap: () async {
+                final Uri params = Uri(
+                  scheme: 'https',
+                  host: 'www.roblox.com',
+                  path: '/games/3132870038/',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+            ProjectCard(
+              title: 'Hacker Simulator',
+              description: 'Hacker Simulator',
+              image: 'https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png',
+              onTap: () async {
+                final Uri params = Uri(
+                  scheme: 'https',
+                  host: 'www.roblox.com',
+                  path: '/games/13006516178/',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+            ProjectCard(
+              title: 'Monte Carlo Simulation Engine',
+              description: 'Hacker Simulator',
+              image: 'https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png',
+              onTap: () async {
+                final Uri params = Uri(
+                  scheme: 'https',
+                  host: 'www.roblox.com',
+                  path: '/games/13006516178/',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+          ])),
+    );
+  }
+}
+
+class ClickableCard extends StatefulWidget {
+  final Widget child;
+  final VoidCallback onTap;
+
+  const ClickableCard({Key? key, required this.child, required this.onTap}) : super(key: key);
+
+  @override
+  _ClickableCardState createState() => _ClickableCardState();
+}
+
+class _ClickableCardState extends State<ClickableCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: MaterialStateMouseCursor.clickable,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 100),
+          transformAlignment: Alignment.center,
+          transform: Matrix4.identity()..scale(_isHovered ? 1.05 : 1.0),
+          child: widget.child,
+        ),
+      ),
+    );
+  }
+}
+
+class ProjectCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final String image;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const ProjectCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.image,
+    required this.onTap,
+    this.icon = FontAwesomeIcons.gamepad,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClickableCard(
+      onTap: () {
+        Navigator.of(context).push(PageRouteBuilder(
+            opaque: false,
+            barrierDismissible: true,
+            pageBuilder: (BuildContext context, _, __) {
+              return ProjectScreen(
+                title: title,
+                image: image,
+                description: description,
+                icon: icon,
+                onTap: onTap,
+              );
+            }));
+      },
+      child: Card(
+        elevation: 10,
+        color: Color.fromARGB(255, 9, 6, 29),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(16)),
+              child: Hero(
+                tag: 'hero-$title',
+                child: Image.network(
+                  image,
+                  width: double.infinity,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 4),
+              child: Text(
+                title,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProjectScreen extends StatelessWidget {
+  const ProjectScreen({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.description,
+    required this.icon,
+    required this.onTap,
+  });
+
+  final String title;
+  final String image;
+  final String description;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pop();
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: Colors.black.withOpacity(0.8),
+        child: Center(
+          child: Hero(
+            tag: "hero-$title",
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height * 0.75,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 39, 39, 39),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height * 0.75,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Stack(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-                          child: Image.network(
-                            'https://cdn.discordapp.com/attachments/990339971040821258/1130589877600276540/Ball_Earth_Thumb.jpg?ex=6589df60&is=65776a60&hm=0f63336d7cf73f857bad504533a7302ed628c51678b944e16bcf3bc58c00d5ff&',
-                            width: double.infinity,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+                              child: Image.network(
+                                image,
+                                width: double.infinity,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: Text(
+                                  title,
+                                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: Text(
+                                  description,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Positioned(
                           bottom: 10,
                           right: 10,
-                          child: FloatingActionButton(
-                            onPressed: () async {
-                              final Uri params = Uri(
-                                scheme: 'https',
-                                host: 'www.roblox.com',
-                                path: '/games/13814171092/Balloon-Simulator',
-                              );
-
-                              if (await canLaunchUrl(params)) {
-                                await launchUrl(params);
-                              }
-                            },
-                            backgroundColor: Colors.white,
-                            child: Icon(Icons.play_arrow, color: Colors.black),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 83, 83, 83)),
+                            ),
+                            onPressed: onTap,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    icon,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 20),
+                                  const Material(
+                                    color: Colors.transparent,
+                                    child: Text(
+                                      "Open",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 4),
-                      child: Text(
-                        'Balloon Simulator',
-                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: Text(
-                        'Balloon Simulator is a Roblox game that has garnered over 200M plays. It is a game where you collect balloons and upgrade your backpack to become the best balloon collector in the world.',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            );
-          },
-        );
-      }).toList(),
-    ));
+            ),
+            // child: Image.network(
+            //   image,
+            //   width: 500,
+            //   fit: BoxFit.contain,
+            // ),
+          ),
+        ),
+      ),
+    );
   }
 }
