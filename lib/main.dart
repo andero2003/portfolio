@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -70,6 +71,8 @@ class _MainAppState extends State<MainApp> {
                           borderRadius: BorderRadius.circular(16)),
                     ),
                     PageView(
+                        scrollDirection: Axis.vertical,
+                        physics: NeverScrollableScrollPhysics(),
                         controller: _pageController,
                         onPageChanged: (index) {
                           setState(() {
@@ -136,89 +139,125 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      CircleAvatar(
-        radius: 140,
-        backgroundColor: Colors.transparent,
-        child: ClipOval(
-          child: Image.network(
-            'https://cdn.discordapp.com/attachments/701919732563181679/1183444071012913272/image.png?ex=65885b2d&is=6575e62d&hm=93d85978bd512c76d661ccf3077b4586b7a38e247c0191945b974abf1f7e8912&',
-            width: 280,
-            height: 280,
-            fit: BoxFit.cover,
-          ),
+    final isTallDevice = MediaQuery.of(context).size.height > MediaQuery.of(context).size.width;
+    return isTallDevice
+        ? Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+            MyAvatar(),
+            const SizedBox(height: 40),
+            MyInformation(
+              isTallDevice: isTallDevice,
+            )
+          ])
+        : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            MyAvatar(),
+            const SizedBox(width: 40),
+            MyInformation(
+              isTallDevice: isTallDevice,
+            )
+          ]);
+  }
+}
+
+class MyInformation extends StatelessWidget {
+  final bool isTallDevice;
+  const MyInformation({
+    super.key,
+    required this.isTallDevice,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: isTallDevice ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Andero Lavrinenko',
+          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 8),
+        Text(
+          'Software Engineer',
+          style: TextStyle(fontSize: 20),
+        ),
+        Text(
+          'Game Developer',
+          style: TextStyle(fontSize: 20),
+        ),
+        SizedBox(height: 8),
+        Row(
+          //social media buttons
+          mainAxisAlignment: isTallDevice ? MainAxisAlignment.center : MainAxisAlignment.start,
+          children: [
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.github),
+              onPressed: () async {
+                final Uri params = Uri(
+                  scheme: 'https',
+                  host: 'github.com',
+                  path: '/andero2003',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+            IconButton(
+              icon: const Icon(FontAwesomeIcons.linkedin),
+              onPressed: () async {
+                //open linkedin
+                final Uri params = Uri(
+                  scheme: 'https',
+                  host: 'www.linkedin.com',
+                  path: '/in/andero-l-97a327269/',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.mail),
+              onPressed: () async {
+                //open mail app
+                final Uri params = Uri(
+                  scheme: 'mailto',
+                  path: 'andero2003@gmail.com',
+                );
+
+                if (await canLaunchUrl(params)) {
+                  await launchUrl(params);
+                }
+              },
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class MyAvatar extends StatelessWidget {
+  const MyAvatar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 140,
+      backgroundColor: Colors.transparent,
+      child: ClipOval(
+        child: Image.network(
+          'https://cdn.discordapp.com/attachments/701919732563181679/1183444071012913272/image.png?ex=65885b2d&is=6575e62d&hm=93d85978bd512c76d661ccf3077b4586b7a38e247c0191945b974abf1f7e8912&',
+          width: 280,
+          height: 280,
+          fit: BoxFit.cover,
         ),
       ),
-      const SizedBox(width: 40),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Andero Lavrinenko',
-            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Software Engineer',
-            style: TextStyle(fontSize: 20),
-          ),
-          Text(
-            'Game Developer',
-            style: TextStyle(fontSize: 20),
-          ),
-          SizedBox(height: 8),
-          Row(
-            //social media buttons
-            children: [
-              IconButton(
-                icon: const Icon(FontAwesomeIcons.github),
-                onPressed: () async {
-                  final Uri params = Uri(
-                    scheme: 'https',
-                    host: 'github.com',
-                    path: '/andero2003',
-                  );
-
-                  if (await canLaunchUrl(params)) {
-                    await launchUrl(params);
-                  }
-                },
-              ),
-              IconButton(
-                icon: const Icon(FontAwesomeIcons.linkedin),
-                onPressed: () async {
-                  //open linkedin
-                  final Uri params = Uri(
-                    scheme: 'https',
-                    host: 'www.linkedin.com',
-                    path: '/in/andero-l-97a327269/',
-                  );
-
-                  if (await canLaunchUrl(params)) {
-                    await launchUrl(params);
-                  }
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.mail),
-                onPressed: () async {
-                  //open mail app
-                  final Uri params = Uri(
-                    scheme: 'mailto',
-                    path: 'andero2003@gmail.com',
-                  );
-
-                  if (await canLaunchUrl(params)) {
-                    await launchUrl(params);
-                  }
-                },
-              ),
-            ],
-          )
-        ],
-      )
-    ]);
+    );
   }
 }
 
@@ -227,34 +266,51 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            SizedBox(height: 64),
-            CircleTextRow(
-              imageRight: true,
-              title: "About Me",
-              text:
-                  "I'm a passionate software engineer and an innovative Roblox game developer. My journey in technology began early and has since evolved into a thriving career marked by creativity, problem-solving, and a relentless pursuit of learning.",
-              image:
-                  "https://cdn.discordapp.com/attachments/729246776443273217/1027696439461171313/unknown.png?ex=6584b064&is=65723b64&hm=2ab70059afc4553ce2ccc4bfb5f55cfac4cdf0cd49c4c94c011297e89b790487&",
+        padding: EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: IntrinsicHeight(
+            child: Column(
+              children: [
+                SizedBox(height: 64),
+                CircleTextRow(
+                  imageRight: true,
+                  title: "About Me",
+                  text:
+                      "I'm a passionate software engineer and an innovative Roblox game developer. My journey in technology began early and has since evolved into a thriving career marked by creativity, problem-solving, and a relentless pursuit of learning.",
+                  image:
+                      "https://cdn.discordapp.com/attachments/729246776443273217/1027696439461171313/unknown.png?ex=6584b064&is=65723b64&hm=2ab70059afc4553ce2ccc4bfb5f55cfac4cdf0cd49c4c94c011297e89b790487&",
+                ),
+                CircleTextRow(
+                  title: "Education",
+                  text:
+                      "I'm an alumnus of Gustav Adolf Grammar School in Tallinn, Estonia, where I graduated with a gold medal in 2022. Currently, I'm expanding my tech expertise at the University of Portsmouth, working towards a BSc in Computer Science, set to complete in 2026.",
+                  image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/47/e3/ef/gunwharf-quays.jpg?w=500&h=400&s=1&",
+                ),
+                CircleTextRow(
+                    imageRight: true,
+                    title: 'Skills',
+                    text:
+                        'My main toolkit includes Lua, Dart/Flutter, Firestore, Python, C#, pSQL, and JavaScript/TypeScript. I also excel in problem solving, and find myself mentoring peers and helping them navigate coding issues efficiently.',
+                    image: 'https://intersog.co.il/handling/assets/uploads/2019/08/shutterstock_1225954372.jpg'),
+                CircleTextRow(
+                  title: "Roblox Career",
+                  text:
+                      "Since 2016, I have been actively involved in freelance Roblox game development, founding Obby Empire Productions, a studio that has garnered over 200M plays. I am the lead programmer of the newly-released Balloon Simulator. I'm also interested in combining Roblox development with external tools and languages to innovate new solutions for game devs.",
+                  image: "https://tr.rbxcdn.com/45dfdb60b5f99e2ce1891d2e10d84d4c/420/420/Image/Png",
+                ),
+                CircleTextRow(
+                  imageRight: true,
+                  title: "Me Outside of Tech",
+                  text:
+                      "When I'm not coding, you'll find me experimenting with recipes in the kitchen, exploring new destinations, strumming my guitar, or engaging in a friendly match of tennis or football. I also have a deep interest in mathematics, which often intersects with my professional pursuits.",
+                  image:
+                      "https://cdn.discordapp.com/attachments/701919732563181679/1184490087749275648/IMG-20230911-WA0020.jpg?ex=658c295b&is=6579b45b&hm=2e5bd819010e6eb48be040e9bb2d9b818ae7f86e3f3dda7c8f8ea3a7ab5d470d&",
+                ),
+              ],
             ),
-            CircleTextRow(
-              title: "Education",
-              text:
-                  "My academic path at the Gustav Adolf Grammar School laid the foundation for my technical pursuits, culminating in a gold medal for academic excellence. Currently, I am enriching my knowledge and skills at the University of Portsmouth, pursuing a BSc in Computer Science.",
-              image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/47/e3/ef/gunwharf-quays.jpg?w=500&h=400&s=1&",
-            ),
-            CircleTextRow(
-              imageRight: true,
-              title: "Professional Path",
-              text:
-                  "Since 2016, I have been actively involved in freelance Roblox game development, founding Obby Empire Productions, a studio that has garnered over 200M plays. I am the lead programmer of Balloon Simulator and the creator of Spaceship Simulator, projects that reflect my commitment to engaging and innovative game design.",
-              image: "https://tr.rbxcdn.com/45dfdb60b5f99e2ce1891d2e10d84d4c/420/420/Image/Png",
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -271,22 +327,34 @@ class CircleTextRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTallDevice = MediaQuery.of(context).size.height > MediaQuery.of(context).size.width;
+
     return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: imageRight
-            ? <Widget>[
-                buildTextColumn(context),
-                const SizedBox(width: 40),
+      child: isTallDevice
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
                 buildCircleAvatar(),
-              ]
-            : <Widget>[
-                buildCircleAvatar(),
-                const SizedBox(width: 40),
+                const SizedBox(height: 40),
                 buildTextColumn(context),
               ],
-      ),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: imageRight
+                  ? <Widget>[
+                      buildTextColumn(context),
+                      const SizedBox(width: 40),
+                      buildCircleAvatar(),
+                    ]
+                  : <Widget>[
+                      buildCircleAvatar(),
+                      const SizedBox(width: 40),
+                      buildTextColumn(context),
+                    ],
+            ),
     );
   }
 
@@ -312,14 +380,15 @@ class CircleTextRow extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
         SizedBox(
-          width: MediaQuery.of(context).size.width / 2.5,
+          width: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.width > MediaQuery.of(context).size.height ? 2.5 : 1.25),
+          height: MediaQuery.of(context).size.width > MediaQuery.of(context).size.height ? null : 200,
           child: Text(
             text,
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 15),
           ),
         )
       ],
@@ -332,13 +401,14 @@ class ProjectsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ratio = MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
     return Center(
       child: FractionallySizedBox(
           widthFactor: 0.65,
           heightFactor: 0.75,
           alignment: Alignment.topCenter,
           child: GridView.count(
-              crossAxisCount: 3,
+              crossAxisCount: ratio > 1 ? 1 : (ratio > 0.75 ? 2 : 3),
               childAspectRatio: 1.25,
               clipBehavior: Clip.none,
               mainAxisSpacing: 10,
