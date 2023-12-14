@@ -418,7 +418,8 @@ class ProjectsScreen extends StatelessWidget {
               children: [
                 ProjectCard(
                   title: 'Balloon Simulator',
-                  description: 'Balloon Simulator',
+                  description:
+                      'My most recent successful project, I made this game in about 10 days in the summer of 2023. Afterwards we kept updating and polishing it over the course of a few months, and it has now reached 30M+ visits.',
                   mediaWidget: Image.network(
                       'https://cdn.discordapp.com/attachments/990339971040821258/1130589877600276540/Ball_Earth_Thumb.jpg?ex=6589df60&is=65776a60&hm=0f63336d7cf73f857bad504533a7302ed628c51678b944e16bcf3bc58c00d5ff',
                       width: double.infinity),
@@ -436,7 +437,7 @@ class ProjectsScreen extends StatelessWidget {
                 ),
                 ProjectCard(
                   title: 'Bouncy Castle Obby!',
-                  description: 'Bouncy Castle Obby!',
+                  description: 'My first game that truly took off in 2021, reaching 100M+ visits in a few months.',
                   mediaWidget:
                       Image.network('https://tr.rbxcdn.com/1d3a1721a2d606ddbfa4d4c0a4c604f9/768/432/Image/Png', width: double.infinity),
                   onTap: () async {
@@ -453,7 +454,7 @@ class ProjectsScreen extends StatelessWidget {
                 ),
                 ProjectCard(
                   title: 'Spaceship Simulator',
-                  description: 'Spaceship Simulator',
+                  description: 'One of my earlier projects.',
                   mediaWidget:
                       Image.network('https://tr.rbxcdn.com/db25d76d4d1c8288ea1dc103a00d7218/768/432/Image/Png', width: double.infinity),
                   onTap: () async {
@@ -470,7 +471,8 @@ class ProjectsScreen extends StatelessWidget {
                 ),
                 ProjectCard(
                   title: 'Hacker Simulator',
-                  description: 'Hacker Simulator',
+                  description:
+                      'A side project I made together with AlvinBlox. For now, the game is still pretty far from done, as we both had other commitments come up. We\'ll hopefully get back to it eventually though, as the gameplay is pretty exciting and has a lot of potential.',
                   mediaWidget:
                       Image.network('https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png', width: double.infinity),
                   onTap: () async {
@@ -487,7 +489,8 @@ class ProjectsScreen extends StatelessWidget {
                 ),
                 ProjectCard(
                   title: 'Monte Carlo Simulation Engine',
-                  description: 'Monte Carlo Simulation Engine',
+                  description:
+                      'Making a ton of Excel sheets to balance my Roblox games was getting tedious, and they don\'t account for randomness. So I made this simulation framework that allows me to the model the game logic and economy in a simple way. It is designed to simulate the activities of any number of players over varying durations, ensuring a more efficient and realistic representation of in-game dynamics',
                   mediaWidget: Image.network('https://cdn.discordapp.com/attachments/729246776443273217/1183769846052311130/image.png',
                       width: double.infinity),
                   icon: FontAwesomeIcons.github,
@@ -505,8 +508,9 @@ class ProjectsScreen extends StatelessWidget {
                 ),
                 ProjectCard(
                   title: 'Roblox Integrated Project Management Tool',
-                  description: 'Roblox Integrated Project Management Tool',
-                  mediaWidget: Image.network('https://cdn.discordapp.com/attachments/701919732563181679/1184963502591447141/image.png',
+                  description:
+                      'Something I made as part of my university coursework. It uses the Roblox OAuth 2.0 service and Roblox APIs to seamlessly fetch user\'s games and set up projects for them. Uses Firestore to store the project data, keeping it in sync for all team members.',
+                  mediaWidget: Image.network('https://cdn.discordapp.com/attachments/701919732563181679/1184963876496887889/image.png',
                       width: double.infinity),
                   icon: FontAwesomeIcons.github,
                   onTap: () async {
