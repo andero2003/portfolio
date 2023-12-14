@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+import 'package:http/http.dart' as http;
 
 import 'dart:math';
 
@@ -173,7 +174,7 @@ class MyInformation extends StatelessWidget {
       children: [
         Text(
           'Andero Lavrinenko',
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 8),
         Text(
@@ -293,7 +294,7 @@ class AboutScreen extends StatelessWidget {
                     title: 'Skills',
                     text:
                         'My main toolkit includes Lua, Dart/Flutter, Firestore, Python, C#, pSQL, and JavaScript/TypeScript. I also excel in problem solving, and find myself mentoring peers and helping them navigate coding issues efficiently.',
-                    image: 'https://intersog.co.il/handling/assets/uploads/2019/08/shutterstock_1225954372.jpg'),
+                    image: 'https://cdn.discordapp.com/attachments/701919732563181679/1184943174536417450/image.png'),
                 CircleTextRow(
                   title: "Roblox Career",
                   text:
@@ -486,8 +487,7 @@ class ProjectsScreen extends StatelessWidget {
                 ProjectCard(
                   title: 'Monte Carlo Simulation Engine',
                   description: 'Monte Carlo Simulation Engine',
-                  mediaWidget: VideoPlayerWidget(
-                      videoUrl: 'https://cdn.discordapp.com/attachments/701919732563181679/1184248008834035762/simulationapp.mp4'),
+                  mediaWidget: VideoPlayerWidget(videoUrl: 'https://andero2003.github.io/portfolio/videos/simulationapp.mp4'),
                   icon: FontAwesomeIcons.github,
                   onTap: () async {
                     final Uri params = Uri(
@@ -504,8 +504,7 @@ class ProjectsScreen extends StatelessWidget {
                 ProjectCard(
                   title: 'Roblox Integrated Project Management Tool',
                   description: 'Roblox Integrated Project Management Tool',
-                  mediaWidget: VideoPlayerWidget(
-                      videoUrl: 'https://cdn.discordapp.com/attachments/701919732563181679/1184248007860949073/projecttoolapp.mp4'),
+                  mediaWidget: VideoPlayerWidget(videoUrl: 'https://andero2003.github.io/portfolio/videos/projecttoolapp.mp4'),
                   icon: FontAwesomeIcons.github,
                   onTap: () async {
                     final Uri params = Uri(
@@ -545,10 +544,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   void _initVideoPlayer() async {
     _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
-    await _controller.initialize();
-    setState(() {});
     _controller.setVolume(0);
     _controller.setLooping(true);
+    await _controller.initialize();
+    final response = await http.head(Uri.parse(widget.videoUrl));
+    print(response.statusCode);
+
+    setState(() {});
   }
 
   @override
