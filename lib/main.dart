@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -533,23 +534,14 @@ class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late VideoPlayerController _controller;
+  late VideoPlayerController _videoPlayerController;
   late Future<void> _initializeVideoPlayerFuture;
 
   @override
   void initState() {
-    _initVideoPlayer();
-
     super.initState();
-  }
-
-  void _initVideoPlayer() async {
-    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
-    _initializeVideoPlayerFuture = _controller.initialize().then((_) {
-      _controller.setVolume(0);
-      _controller.setLooping(true);
-      setState(() {});
-    });
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
+    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
   }
 
   @override
@@ -558,38 +550,21 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       future: _initializeVideoPlayerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          final chewieController = ChewieController(
+            videoPlayerController: _videoPlayerController,
+            aspectRatio: _videoPlayerController.value.aspectRatio,
+            autoPlay: true,
+            allowFullScreen: false,
+            looping: true,
+          );
           return AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: Stack(
-              children: [
-                VideoPlayer(_controller),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(24),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          if (_controller.value.isPlaying) {
-                            _controller.pause();
-                          } else {
-                            _controller.play();
-                          }
-                        });
-                      },
-                      child: Icon(
-                        _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                        color: Colors.white,
-                        size: 16,
-                      )),
-                ),
-              ],
+            aspectRatio: chewieController.aspectRatio!,
+            child: Chewie(
+              controller: chewieController,
             ),
           );
         } else {
-          return Center(child: Expanded(child: CircularProgressIndicator()));
+          return Center(child: CircularProgressIndicator());
         }
       },
     );
@@ -597,8 +572,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   void dispose() {
+    _videoPlayerController.dispose();
     super.dispose();
-    _controller.dispose();
   }
 }
 
