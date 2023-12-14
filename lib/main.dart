@@ -534,29 +534,31 @@ class VideoPlayerWidget extends StatefulWidget {
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
 
   @override
   void initState() {
-    super.initState();
-
     _initVideoPlayer();
+
+    super.initState();
   }
 
   void _initVideoPlayer() async {
     _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
-    _controller.setVolume(0);
-    _controller.setLooping(true);
-    await _controller.initialize();
-    final response = await http.head(Uri.parse(widget.videoUrl));
-    print(response.statusCode);
-
-    setState(() {});
+    _initializeVideoPlayerFuture = _controller.initialize().then((_) {
+      _controller.setVolume(0);
+      _controller.setLooping(true);
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return _controller.value.isInitialized
-        ? AspectRatio(
+    return FutureBuilder(
+      future: _initializeVideoPlayerFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
             child: Stack(
               children: [
@@ -585,8 +587,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                 ),
               ],
             ),
-          )
-        : Container();
+          );
+        } else {
+          return Center(child: Expanded(child: CircularProgressIndicator()));
+        }
+      },
+    );
   }
 
   @override
