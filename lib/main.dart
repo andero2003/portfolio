@@ -31,7 +31,10 @@ class _MainAppState extends State<MainApp> {
     LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [Color.fromARGB(255, 11, 26, 73), const Color.fromARGB(255, 20, 82, 133)],
+      colors: [
+        Color.fromARGB(255, 11, 26, 73),
+        const Color.fromARGB(255, 20, 82, 133)
+      ],
     ),
     LinearGradient(
       begin: Alignment.topLeft,
@@ -49,9 +52,14 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true, primarySwatch: Colors.blue, textTheme: GoogleFonts.ptMonoTextTheme()),
-      darkTheme:
-          ThemeData.dark(useMaterial3: true).copyWith(textTheme: Typography().white.apply(fontFamily: GoogleFonts.ptMono().fontFamily)),
+      theme: ThemeData(
+          useMaterial3: true,
+          primarySwatch: Colors.blue,
+          textTheme: GoogleFonts.ptMonoTextTheme()),
+      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+          textTheme: Typography()
+              .white
+              .apply(fontFamily: GoogleFonts.ptMono().fontFamily)),
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -69,7 +77,9 @@ class _MainAppState extends State<MainApp> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: const Color.fromARGB(255, 146, 146, 146), width: 2),
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 146, 146, 146),
+                              width: 2),
                           borderRadius: BorderRadius.circular(16)),
                     ),
                     PageView(
@@ -96,7 +106,10 @@ class _MainAppState extends State<MainApp> {
                               },
                               child: Text("Home",
                                   style: TextStyle(
-                                      color: currentPageIndex == 0 ? const Color.fromARGB(255, 59, 104, 228) : Colors.white,
+                                      color: currentPageIndex == 0
+                                          ? const Color.fromARGB(
+                                              255, 59, 104, 228)
+                                          : Colors.white,
                                       fontSize: 24))),
                           SizedBox(width: 16),
                           TextButton(
@@ -109,7 +122,10 @@ class _MainAppState extends State<MainApp> {
                               },
                               child: Text("About",
                                   style: TextStyle(
-                                      color: currentPageIndex == 1 ? const Color.fromARGB(255, 59, 104, 228) : Colors.white,
+                                      color: currentPageIndex == 1
+                                          ? const Color.fromARGB(
+                                              255, 59, 104, 228)
+                                          : Colors.white,
                                       fontSize: 24))),
                           SizedBox(width: 16),
                           TextButton(
@@ -122,7 +138,10 @@ class _MainAppState extends State<MainApp> {
                               },
                               child: Text("Projects",
                                   style: TextStyle(
-                                      color: currentPageIndex == 2 ? const Color.fromARGB(255, 59, 104, 228) : Colors.white,
+                                      color: currentPageIndex == 2
+                                          ? const Color.fromARGB(
+                                              255, 59, 104, 228)
+                                          : Colors.white,
                                       fontSize: 24))),
                         ],
                       ),
@@ -141,15 +160,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTallDevice = MediaQuery.of(context).size.height > MediaQuery.of(context).size.width;
+    final isTallDevice =
+        MediaQuery.of(context).size.height > MediaQuery.of(context).size.width;
     return isTallDevice
-        ? Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            MyAvatar(),
-            const SizedBox(height: 40),
-            MyInformation(
-              isTallDevice: isTallDevice,
-            )
-          ])
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+                MyAvatar(),
+                const SizedBox(height: 40),
+                MyInformation(
+                  isTallDevice: isTallDevice,
+                )
+              ])
         : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             MyAvatar(),
             const SizedBox(width: 40),
@@ -171,7 +194,8 @@ class MyInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: isTallDevice ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          isTallDevice ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Text(
           'Andero Lavrinenko',
@@ -189,7 +213,8 @@ class MyInformation extends StatelessWidget {
         SizedBox(height: 8),
         Row(
           //social media buttons
-          mainAxisAlignment: isTallDevice ? MainAxisAlignment.center : MainAxisAlignment.start,
+          mainAxisAlignment:
+              isTallDevice ? MainAxisAlignment.center : MainAxisAlignment.start,
           children: [
             IconButton(
               icon: const Icon(FontAwesomeIcons.github),
@@ -288,19 +313,22 @@ class AboutScreen extends StatelessWidget {
                   title: "Education",
                   text:
                       "I'm an alumnus of Gustav Adolf Grammar School in Tallinn, Estonia, where I graduated with a gold medal in 2022. Currently, I'm expanding my tech expertise at the University of Portsmouth, working towards a BSc in Computer Science, set to complete in 2026.",
-                  image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/47/e3/ef/gunwharf-quays.jpg?w=500&h=400&s=1&",
+                  image:
+                      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/47/e3/ef/gunwharf-quays.jpg?w=500&h=400&s=1&",
                 ),
                 CircleTextRow(
                     imageRight: true,
                     title: 'Skills',
                     text:
                         'My main toolkit includes Lua, Dart/Flutter, Firestore, Python, C#, pSQL, and JavaScript/TypeScript. I also excel in problem solving, and find myself mentoring peers and helping them navigate coding issues efficiently.',
-                    image: 'https://cdn.discordapp.com/attachments/701919732563181679/1184943174536417450/image.png'),
+                    image:
+                        'https://cdn.discordapp.com/attachments/701919732563181679/1184943174536417450/image.png'),
                 CircleTextRow(
                   title: "Roblox Career",
                   text:
                       "Since 2016, I have been actively involved in freelance Roblox game development, founding Obby Empire Productions, a studio that has garnered over 200M plays. I am the lead programmer of the newly-released Balloon Simulator. I'm also interested in combining Roblox development with external tools and languages to innovate new solutions for game devs.",
-                  image: "https://tr.rbxcdn.com/45dfdb60b5f99e2ce1891d2e10d84d4c/420/420/Image/Png",
+                  image:
+                      "https://tr.rbxcdn.com/45dfdb60b5f99e2ce1891d2e10d84d4c/420/420/Image/Png",
                 ),
                 CircleTextRow(
                   imageRight: true,
@@ -325,11 +353,17 @@ class CircleTextRow extends StatelessWidget {
   final String image;
   final bool imageRight;
 
-  const CircleTextRow({super.key, required this.title, required this.text, required this.image, this.imageRight = false});
+  const CircleTextRow(
+      {super.key,
+      required this.title,
+      required this.text,
+      required this.image,
+      this.imageRight = false});
 
   @override
   Widget build(BuildContext context) {
-    final isTallDevice = MediaQuery.of(context).size.height > MediaQuery.of(context).size.width;
+    final isTallDevice =
+        MediaQuery.of(context).size.height > MediaQuery.of(context).size.width;
 
     return Expanded(
       child: isTallDevice
@@ -386,8 +420,15 @@ class CircleTextRow extends StatelessWidget {
         ),
         SizedBox(height: 8),
         SizedBox(
-          width: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.width > MediaQuery.of(context).size.height ? 2.5 : 1.25),
-          height: MediaQuery.of(context).size.width > MediaQuery.of(context).size.height ? null : 200,
+          width: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.width >
+                      MediaQuery.of(context).size.height
+                  ? 2.5
+                  : 1.25),
+          height: MediaQuery.of(context).size.width >
+                  MediaQuery.of(context).size.height
+              ? null
+              : 200,
           child: Text(
             text,
             style: TextStyle(fontSize: 15),
@@ -403,7 +444,8 @@ class ProjectsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ratio = MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
+    final ratio =
+        MediaQuery.of(context).size.height / MediaQuery.of(context).size.width;
     return Center(
       child: FractionallySizedBox(
           widthFactor: 0.65,
@@ -437,9 +479,11 @@ class ProjectsScreen extends StatelessWidget {
                 ),
                 ProjectCard(
                   title: 'Bouncy Castle Obby!',
-                  description: 'My first game that truly took off in 2021, reaching 100M+ visits in a few months.',
-                  mediaWidget:
-                      Image.network('https://tr.rbxcdn.com/1d3a1721a2d606ddbfa4d4c0a4c604f9/768/432/Image/Png', width: double.infinity),
+                  description:
+                      'My first game that truly took off in 2021, reaching 100M+ visits in a few months.',
+                  mediaWidget: Image.network(
+                      'https://tr.rbxcdn.com/1d3a1721a2d606ddbfa4d4c0a4c604f9/768/432/Image/Png',
+                      width: double.infinity),
                   onTap: () async {
                     final Uri params = Uri(
                       scheme: 'https',
@@ -455,8 +499,9 @@ class ProjectsScreen extends StatelessWidget {
                 ProjectCard(
                   title: 'Spaceship Simulator',
                   description: 'One of my earlier projects.',
-                  mediaWidget:
-                      Image.network('https://tr.rbxcdn.com/db25d76d4d1c8288ea1dc103a00d7218/768/432/Image/Png', width: double.infinity),
+                  mediaWidget: Image.network(
+                      'https://tr.rbxcdn.com/db25d76d4d1c8288ea1dc103a00d7218/768/432/Image/Png',
+                      width: double.infinity),
                   onTap: () async {
                     final Uri params = Uri(
                       scheme: 'https',
@@ -473,8 +518,9 @@ class ProjectsScreen extends StatelessWidget {
                   title: 'Hacker Simulator',
                   description:
                       'A side project I made together with AlvinBlox. For now, the game is still pretty far from done, as we both had other commitments come up. We\'ll hopefully get back to it eventually though, as the gameplay is pretty exciting and has a lot of potential.',
-                  mediaWidget:
-                      Image.network('https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png', width: double.infinity),
+                  mediaWidget: Image.network(
+                      'https://tr.rbxcdn.com/9a511620bd22757abe7efccd566c6a0d/768/432/Image/Png',
+                      width: double.infinity),
                   onTap: () async {
                     final Uri params = Uri(
                       scheme: 'https',
@@ -491,9 +537,10 @@ class ProjectsScreen extends StatelessWidget {
                   title: 'Monte Carlo Simulation Engine',
                   description:
                       'Making a ton of Excel sheets to balance my Roblox games was getting tedious, and they don\'t account for randomness. So I made this simulation framework that allows me to the model the game logic and economy in a simple way. It is designed to simulate the activities of any number of players over varying durations, ensuring a more efficient and realistic representation of in-game dynamics',
-                  mediaWidget: Image.network('https://cdn.discordapp.com/attachments/729246776443273217/1183769846052311130/image.png',
+                  mediaWidget: Image.network(
+                      'https://cdn.discordapp.com/attachments/729246776443273217/1183769846052311130/image.png',
                       width: double.infinity),
-                  icon: FontAwesomeIcons.github,
+                  icon: FontAwesomeIcons.youtube,
                   onTap: () async {
                     final Uri params = Uri(
                       scheme: 'https',
@@ -510,9 +557,10 @@ class ProjectsScreen extends StatelessWidget {
                   title: 'Roblox Integrated Project Management Tool',
                   description:
                       'Something I made as part of my university coursework. It uses the Roblox OAuth 2.0 service and Roblox APIs to seamlessly fetch user\'s games and set up projects for them. Uses Firestore to store the project data, keeping it in sync for all team members.',
-                  mediaWidget: Image.network('https://cdn.discordapp.com/attachments/701919732563181679/1184963876496887889/image.png',
+                  mediaWidget: Image.network(
+                      'https://cdn.discordapp.com/attachments/701919732563181679/1184963876496887889/image.png',
                       width: double.infinity),
-                  icon: FontAwesomeIcons.github,
+                  icon: FontAwesomeIcons.youtube,
                   onTap: () async {
                     final Uri params = Uri(
                       scheme: 'https',
@@ -546,7 +594,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
+    _videoPlayerController =
+        VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
     _initializeVideoPlayerFuture = _videoPlayerController.initialize();
   }
 
@@ -587,7 +636,8 @@ class ClickableCard extends StatefulWidget {
   final Widget child;
   final VoidCallback onTap;
 
-  const ClickableCard({Key? key, required this.child, required this.onTap}) : super(key: key);
+  const ClickableCard({Key? key, required this.child, required this.onTap})
+      : super(key: key);
 
   @override
   _ClickableCardState createState() => _ClickableCardState();
@@ -656,11 +706,13 @@ class ProjectCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(16)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(12), topRight: Radius.circular(16)),
               child: Hero(tag: 'hero-$title', child: mediaWidget),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 4),
+              padding: const EdgeInsets.only(
+                  left: 16.0, right: 16.0, top: 8.0, bottom: 4),
               child: Text(
                 title,
                 overflow: TextOverflow.ellipsis,
@@ -704,7 +756,8 @@ class ProjectScreen extends StatelessWidget {
           child: Hero(
             tag: "hero-$title",
             child: Container(
-              width: min((mediaWidget is VideoPlayerWidget) ? 1000 : 600, MediaQuery.of(context).size.width),
+              width: min((mediaWidget is VideoPlayerWidget) ? 1000 : 600,
+                  MediaQuery.of(context).size.width),
               height: MediaQuery.of(context).size.height * 0.75,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 39, 39, 39),
@@ -716,66 +769,73 @@ class ProjectScreen extends StatelessWidget {
                     minHeight: MediaQuery.of(context).size.height * 0.75,
                   ),
                   child: IntrinsicHeight(
-                    child: Stack(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
-                                child: mediaWidget),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: Text(
-                                  title,
-                                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: Text(
-                                  description,
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          right: 10,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 83, 83, 83)),
-                            ),
-                            onPressed: onTap,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    icon,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(width: 20),
-                                  const Material(
-                                    color: Colors.transparent,
-                                    child: Text(
-                                      "Open",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                        ClipRRect(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12)),
+                            child: mediaWidget),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
                             ),
                           ),
-                        )
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 16.0, right: 16.0),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              description,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(icon ==
+                                              FontAwesomeIcons.youtube
+                                          ? Color.fromARGB(255, 162, 0, 0)
+                                          : Color.fromARGB(255, 59, 104, 228)),
+                                ),
+                                onPressed: onTap,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        icon,
+                                        color: Colors.white,
+                                      ),
+                                      const SizedBox(width: 20),
+                                      const Material(
+                                        color: Colors.transparent,
+                                        child: Text(
+                                          "Open",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
