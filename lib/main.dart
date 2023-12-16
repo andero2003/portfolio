@@ -372,15 +372,15 @@ class _ScrollDownIndicatorState extends State<ScrollDownIndicator> {
             left: 0.0,
             right: 0.0,
             child: Center(
-              child: InkWell(
-                onTap: () {
+              child: IconButton(
+                onPressed: () {
                   widget.controller.animateTo(
                     widget.controller.position.maxScrollExtent,
                     duration: Duration(milliseconds: 500),
                     curve: Curves.easeInOut,
                   );
                 },
-                child: Icon(
+                icon: Icon(
                   Icons.arrow_downward,
                   color: Colors.white,
                   size: 36.0,
