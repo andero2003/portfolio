@@ -297,7 +297,7 @@ class AboutScreen extends StatelessWidget {
                         imageRight: true,
                         title: 'Skills',
                         text:
-                            'My main toolkit includes Lua, Dart/Flutter, Firestore, Python, C#, pSQL, and JavaScript/TypeScript. I also excel in problem solving, and find myself mentoring peers and helping them navigate coding issues efficiently.',
+                            'My main toolkit includes Lua, Dart/Flutter, Firestore, Python, C#, pSQL, and JavaScript/TypeScript. As the technical lead in most projects, I\'ve demonstrated a keen ability for making critical technical decisions, managing team dynamics, and fostering effective communication. I also excel in problem solving, and find myself mentoring peers and helping them navigate coding issues efficiently.',
                         image: 'https://cdn.discordapp.com/attachments/701919732563181679/1184943174536417450/image.png'),
                     CircleTextRow(
                       title: "Roblox Career",
