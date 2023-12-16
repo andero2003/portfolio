@@ -264,58 +264,138 @@ class MyAvatar extends StatelessWidget {
 }
 
 class AboutScreen extends StatelessWidget {
-  const AboutScreen({super.key});
+  AboutScreen({super.key});
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Padding(
         padding: EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: IntrinsicHeight(
-            child: Column(
-              children: [
-                SizedBox(height: 64),
-                CircleTextRow(
-                  imageRight: true,
-                  title: "About Me",
-                  text:
-                      "I'm a passionate software engineer and an innovative Roblox game developer. My journey in technology began early and has since evolved into a thriving career marked by creativity, problem-solving, and a relentless pursuit of learning.",
-                  image:
-                      "https://cdn.discordapp.com/attachments/729246776443273217/1027696439461171313/unknown.png?ex=6584b064&is=65723b64&hm=2ab70059afc4553ce2ccc4bfb5f55cfac4cdf0cd49c4c94c011297e89b790487&",
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              controller: _scrollController,
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    SizedBox(height: 64),
+                    CircleTextRow(
+                      imageRight: true,
+                      title: "About Me",
+                      text:
+                          "I'm a passionate software engineer and an innovative Roblox game developer. My journey in technology began early and has since evolved into a thriving career marked by creativity, problem-solving, and a relentless pursuit of learning.",
+                      image:
+                          "https://cdn.discordapp.com/attachments/729246776443273217/1027696439461171313/unknown.png?ex=6584b064&is=65723b64&hm=2ab70059afc4553ce2ccc4bfb5f55cfac4cdf0cd49c4c94c011297e89b790487&",
+                    ),
+                    CircleTextRow(
+                      title: "Education",
+                      text:
+                          "I'm an alumnus of Gustav Adolf Grammar School in Tallinn, Estonia, where I graduated with a gold medal in 2022. Currently, I'm expanding my tech expertise at the University of Portsmouth, working towards a BSc in Computer Science, set to complete in 2026.",
+                      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/47/e3/ef/gunwharf-quays.jpg?w=500&h=400&s=1&",
+                    ),
+                    CircleTextRow(
+                        imageRight: true,
+                        title: 'Skills',
+                        text:
+                            'My main toolkit includes Lua, Dart/Flutter, Firestore, Python, C#, pSQL, and JavaScript/TypeScript. I also excel in problem solving, and find myself mentoring peers and helping them navigate coding issues efficiently.',
+                        image: 'https://cdn.discordapp.com/attachments/701919732563181679/1184943174536417450/image.png'),
+                    CircleTextRow(
+                      title: "Roblox Career",
+                      text:
+                          "Since 2016, I have been actively involved in freelance Roblox game development, founding Obby Empire Productions, a studio that has garnered over 200M plays. I am the lead programmer of the newly-released Balloon Simulator. I'm also interested in combining Roblox development with external tools and languages to innovate new solutions for game devs.",
+                      image: "https://tr.rbxcdn.com/45dfdb60b5f99e2ce1891d2e10d84d4c/420/420/Image/Png",
+                    ),
+                    CircleTextRow(
+                      imageRight: true,
+                      title: "Me Outside of Tech",
+                      text:
+                          "When I'm not coding, you'll find me experimenting with recipes in the kitchen, exploring new destinations, strumming my guitar, or engaging in a friendly match of tennis or football. I also have a deep interest in mathematics, which often intersects with my professional pursuits.",
+                      image:
+                          "https://cdn.discordapp.com/attachments/701919732563181679/1184490087749275648/IMG-20230911-WA0020.jpg?ex=658c295b&is=6579b45b&hm=2e5bd819010e6eb48be040e9bb2d9b818ae7f86e3f3dda7c8f8ea3a7ab5d470d&",
+                    ),
+                  ],
                 ),
-                CircleTextRow(
-                  title: "Education",
-                  text:
-                      "I'm an alumnus of Gustav Adolf Grammar School in Tallinn, Estonia, where I graduated with a gold medal in 2022. Currently, I'm expanding my tech expertise at the University of Portsmouth, working towards a BSc in Computer Science, set to complete in 2026.",
-                  image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/47/e3/ef/gunwharf-quays.jpg?w=500&h=400&s=1&",
-                ),
-                CircleTextRow(
-                    imageRight: true,
-                    title: 'Skills',
-                    text:
-                        'My main toolkit includes Lua, Dart/Flutter, Firestore, Python, C#, pSQL, and JavaScript/TypeScript. I also excel in problem solving, and find myself mentoring peers and helping them navigate coding issues efficiently.',
-                    image: 'https://cdn.discordapp.com/attachments/701919732563181679/1184943174536417450/image.png'),
-                CircleTextRow(
-                  title: "Roblox Career",
-                  text:
-                      "Since 2016, I have been actively involved in freelance Roblox game development, founding Obby Empire Productions, a studio that has garnered over 200M plays. I am the lead programmer of the newly-released Balloon Simulator. I'm also interested in combining Roblox development with external tools and languages to innovate new solutions for game devs.",
-                  image: "https://tr.rbxcdn.com/45dfdb60b5f99e2ce1891d2e10d84d4c/420/420/Image/Png",
-                ),
-                CircleTextRow(
-                  imageRight: true,
-                  title: "Me Outside of Tech",
-                  text:
-                      "When I'm not coding, you'll find me experimenting with recipes in the kitchen, exploring new destinations, strumming my guitar, or engaging in a friendly match of tennis or football. I also have a deep interest in mathematics, which often intersects with my professional pursuits.",
-                  image:
-                      "https://cdn.discordapp.com/attachments/701919732563181679/1184490087749275648/IMG-20230911-WA0020.jpg?ex=658c295b&is=6579b45b&hm=2e5bd819010e6eb48be040e9bb2d9b818ae7f86e3f3dda7c8f8ea3a7ab5d470d&",
-                ),
-              ],
+              ),
             ),
-          ),
+            ScrollDownIndicator(
+              controller: _scrollController,
+            ),
+          ],
         ),
       ),
     );
+  }
+}
+
+class ScrollDownIndicator extends StatefulWidget {
+  final ScrollController controller;
+
+  ScrollDownIndicator({required this.controller});
+
+  @override
+  State<ScrollDownIndicator> createState() => _ScrollDownIndicatorState();
+}
+
+class _ScrollDownIndicatorState extends State<ScrollDownIndicator> {
+  bool _showIndicator = true;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_scrollListener);
+  }
+
+  _scrollListener() {
+    if (widget.controller.position.atEdge) {
+      if (widget.controller.position.pixels == 0) {
+        // You're at the top.
+      } else {
+        // You're at the bottom.
+        setState(() {
+          _showIndicator = false;
+        });
+      }
+    } else {
+      setState(() {
+        _showIndicator = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _showIndicator
+        ? Positioned(
+            bottom: 20.0,
+            left: 0.0,
+            right: 0.0,
+            child: Center(
+              child: InkWell(
+                onTap: () {
+                  widget.controller.animateTo(
+                    widget.controller.position.maxScrollExtent,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                child: Icon(
+                  Icons.arrow_downward,
+                  color: Colors.white,
+                  size: 36.0,
+                ),
+              ),
+            ),
+          )
+        : Container();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    widget.controller.removeListener(_scrollListener);
+    super.dispose();
   }
 }
 
