@@ -1,6 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -381,7 +379,7 @@ class _ScrollDownIndicatorState extends State<ScrollDownIndicator> {
                   );
                 },
                 icon: Icon(
-                  Icons.arrow_downward,
+                  FontAwesomeIcons.arrowDown,
                   color: Colors.white,
                   size: 36.0,
                 ),
@@ -612,59 +610,6 @@ class ProjectsScreen extends StatelessWidget {
   }
 }
 
-class VideoPlayerWidget extends StatefulWidget {
-  final String videoUrl;
-
-  VideoPlayerWidget({required this.videoUrl});
-
-  @override
-  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
-}
-
-class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late VideoPlayerController _videoPlayerController;
-  late Future<void> _initializeVideoPlayerFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
-    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initializeVideoPlayerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final chewieController = ChewieController(
-            videoPlayerController: _videoPlayerController,
-            aspectRatio: _videoPlayerController.value.aspectRatio,
-            autoPlay: true,
-            allowFullScreen: false,
-            looping: true,
-          );
-          return AspectRatio(
-            aspectRatio: chewieController.aspectRatio!,
-            child: Chewie(
-              controller: chewieController,
-            ),
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    super.dispose();
-  }
-}
-
 class ClickableCard extends StatefulWidget {
   final Widget child;
   final VoidCallback onTap;
@@ -786,7 +731,7 @@ class ProjectScreen extends StatelessWidget {
           child: Hero(
             tag: "hero-$title",
             child: Container(
-              width: min((mediaWidget is VideoPlayerWidget) ? 1000 : 600, MediaQuery.of(context).size.width),
+              width: min(600, MediaQuery.of(context).size.width),
               height: MediaQuery.of(context).size.height * 0.75,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 39, 39, 39),
